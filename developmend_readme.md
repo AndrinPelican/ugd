@@ -21,7 +21,7 @@ Further input, which can be changed also after generating the graphs
 Not changeable by the user:
     
 * internally build up a dictionary, of info variables (on mixing)
-
+    
 * two matrices for calculating the statistic
 
     * the all one matrix minus the identity matrix

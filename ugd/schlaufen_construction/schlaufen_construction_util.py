@@ -1,6 +1,22 @@
 from ugd.help_function.util import rand_element_of_set
+import numpy as np
 
 ''' Random draw functions:'''
+
+def is_schlaufe_type_3(graph, working_node, is_active, start_node):
+    if working_node==start_node:
+        return False # the startnode cannot close a schlaufe of type 3, because there is initially no edge leading to it
+
+    # when it is already marked it must be an odd cycle, because otherwise a schlaufe of type I would have been returned
+    if graph.nodes[working_node].active_visited or graph.nodes[working_node].passive_visited:
+        return random_schlaufe_of_type_3(graph, working_node, is_active)
+    return False
+
+def random_schlaufe_of_type_3(graph, working_node, is_active):
+    # gives with probability 1/ # (feasible_outnodes+1) True out else false
+    outnodes_number = feasible_out_nodes(graph, working_node, is_active).__len__()
+
+    return np.random.choice([True,False],1, p=[1/(outnodes_number+1), 1-1/(outnodes_number+1)])
 
 
 def random_draw(graph, working_node, is_active):
@@ -75,3 +91,4 @@ def cycle_found(graph, out_node, is_active):
             return True
         else:
             return False
+

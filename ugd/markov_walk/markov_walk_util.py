@@ -60,6 +60,7 @@ def switch_cycles(graph, cycle_nodes, active_startnodes):
     return graph
 
 
+
 def del_marks(graph, start_nodes):
     for node in range(graph.node_number):
         del_outarc_marks(graph, node)

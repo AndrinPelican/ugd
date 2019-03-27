@@ -53,13 +53,16 @@ def create_schlaufen_sequence(graph):
     ind = 0
     while ad_schlaufen:
         start_node, cycle_start_node, active_cyclenode = add_random_schlaufe(graph, ind)
+        # fixme cycle_start says which schlaufen are of type 1, we keep trak of them determine which one to switch and return switching start nodes
         # book keeping on marked Schlaufen
         start_nodes.append(start_node)
         cycle_start_nodes.append(cycle_start_node)
         active_cyclenodes.append(active_cyclenode)
+        # fixme here make list of biolation matrixes
         violation_matrix = update_violation_matrix(graph, cycle_start_node, active_cyclenode, ind, violation_matrix)
 
         # check feasibility of Schlaufen sequence
+        # fixme here breithensuche, gibt gefundenes tupel aus oder false
         if no_violations(violation_matrix, graph):
             is_violated = False
             return graph, is_violated, start_nodes, cycle_start_nodes, active_cyclenodes

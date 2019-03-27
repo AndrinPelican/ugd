@@ -21,6 +21,7 @@ def rand_element_of_set(set):
 
 
 def get_path(startnode, active_start, graph, pathnumber):
+    # This function is only allowed be used on schlaufen of type 1
     path = []
     working_node = startnode
     path_continue = True
