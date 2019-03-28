@@ -5,6 +5,15 @@ from test.test_resources.plain_graph_integration import adj_m_1, var_dict_1, adj
 
 
 
+"""
+def test_graph_no_rstrc_mock():
+    output_dict= graph_hyp_test(adj_m=adj_m_1, var_dict=var_dict_1, test_variable=('gender', 'm', 'f'), mixing_time=100, anz_sim=100, show_polt=False, controls=['gender'])
+    assert True
+"""
+
+
+
+
 def test_graph_no_rstrc():
     output_dict= graph_hyp_test(adj_m=adj_m_1, var_dict=var_dict_1, test_variable=('gender', 'm', 'f'), mixing_time=100, anz_sim=100, show_polt=False)
     mue = np.mean(output_dict['stat_list'])
