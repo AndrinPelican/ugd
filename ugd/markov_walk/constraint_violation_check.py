@@ -26,17 +26,7 @@ def fesable_switch_schlaufen_combination(violation_matrices,active_cyclenodes):
         is_feasible_bool = False
         return is_feasible_bool, 'placeholder'  # then no new switchable schlaufe has been found
 
-
-    # fixme maka a bigger integration test with Nayatoke framework
-    """
-    # fixme maybe this can be
-    else:
-        if is_feasible(matrix_list = [violation_matrices[-1]]):
-            is_feasible_bool = True
-            switch_cycle_nodes = set_elm_to_non_exept(active_cyclenodes, [last_ind])
-            return is_feasible_bool, switch_cycle_nodes
-
-    # indexes of schlaufen of type 1"""
+    # indexes of schlaufen of type 1
     switch_ind_list = []
     for i, element in enumerate(active_cyclenodes[:-1]): # last schlaufe is alwais conidered
         if not(element is None):
@@ -52,6 +42,12 @@ def fesable_switch_schlaufen_combination(violation_matrices,active_cyclenodes):
                 is_feasible_bool = True
                 switch_cycle_nodes = set_elm_to_non_exept(active_cyclenodes, try_indexes)
                 return is_feasible_bool, switch_cycle_nodes
+
+
+    if is_feasible(violation_matrices):
+        is_feasible_bool = True
+        return is_feasible_bool, active_cyclenodes
+
 
     is_feasible_bool = False
     return is_feasible_bool, 'placeholder'  # then no new switchable schlaufe has been found

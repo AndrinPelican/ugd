@@ -2,7 +2,6 @@
 Help function for the markov walk.
 '''
 import numpy as np
-
 from ugd.help_function.util import get_path, form_to_set_index
 
 
@@ -13,7 +12,7 @@ def get_violation_matrix(graph, cycle_start_node, active_cyclenode, ind):
         return violation_matrix
     else:
         path = get_path(startnode=cycle_start_node, active_start=active_cyclenode, graph=graph, pathnumber=ind)
-        is_aktive = True
+        is_aktive = active_cyclenode  # change, start aktie or passive depending on whether path starts with an aktiv edge
         for edge in iter_edge_in_path(path):
             violation_matrix = update_violation_matrix_by_edge(graph, violation_matrix, edge, is_aktive)
             is_aktive = not (is_aktive)
@@ -33,7 +32,7 @@ def update_violation_matrix_by_edge(graph, violation_matrix, edge, is_active):
             violation_matrix[from_id, to_id] -= 1
             violation_matrix[to_id, from_id] -= 1
         else:
-            violation_matrix[to_id, from_id] += 1
+            violation_matrix[from_id, to_id] += 1
             violation_matrix[to_id, from_id] += 1
 
     return violation_matrix
@@ -47,7 +46,7 @@ def iter_edge_in_path(path):
 
 def switch_cycles(graph, cycle_nodes, active_startnodes):
     for ind, cycle_node in enumerate(cycle_nodes):
-        if cycle_node == None:
+        if cycle_node is None:
             continue
         else:
             is_active = active_startnodes[ind]
@@ -62,7 +61,6 @@ def switch_cycles(graph, cycle_nodes, active_startnodes):
     return graph
 
 
-
 def del_marks(graph, start_nodes):
     for node in range(graph.node_number):
         del_outarc_marks(graph, node)
@@ -75,16 +73,14 @@ def del_outarc_marks(graph, node):
     node_pointer.passive_marked = {}
 
 
-
-def set_elm_to_non_exept(none_list, exept_indexes):
-    # sets all liste ellements, exept the exeption list, to None
-    exept_indexes = set(exept_indexes)
+def set_elm_to_non_exept(none_list, except_indexes):
+    # sets all list elements, except the exception list, to None
+    except_indexes = set(except_indexes)
     for i, element in enumerate(none_list):
-        if not( i in exept_indexes):
+        if not (i in except_indexes):
             none_list[i] = None
     return none_list
 
 
 def is_feasible(matrix_list):
     return np.all(sum(matrix_list) == 0)
-

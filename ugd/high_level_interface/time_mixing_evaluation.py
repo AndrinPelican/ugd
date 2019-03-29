@@ -17,7 +17,7 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim):
 
     edges_changed_numb = 0
 
-    runs = 200
+    runs = 100
 
     # counting
     overheattime = 0

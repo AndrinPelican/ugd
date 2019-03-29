@@ -11,7 +11,7 @@ from ugd.help_function.util import rand_choise
 from ugd.schlaufen_construction.schlaufen import add_random_schlaufe
 from ugd.markov_walk.markov_walk_util import switch_cycles, del_marks, get_violation_matrix
 from ugd.markov_walk.constraint_violation_check import fesable_switch_schlaufen_combination
-
+from ugd.help_function.controll_functions_graph import full_graph_correct
 
 def markov_walk(graph, mixing_time):
     '''
@@ -36,6 +36,7 @@ def do_random_step(graph):
         if is_feasible:  # feasable Schlaufen sequence found
             switch_cycles(graph, switch_cycle_nodes, active_startnodes)
             del_marks(graph, start_nodes)
+
             return graph
         else:  # self loop
             del_marks(graph, start_nodes)

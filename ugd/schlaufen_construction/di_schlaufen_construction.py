@@ -12,11 +12,7 @@ from ugd.help_function.util import rand_element_of_set, del_nodes_mark
 
 def add_di_random_schlaufe(graph, schlaufen_number):
     # random draw of initial node (step 1)
-    found_feasible_start_node = False
-    while not found_feasible_start_node:  # draw start_node with already a active out_edge (smaller overhead)
-        start_node = rand_element_of_set(range(graph.node_number))
-        if not (graph.nodes[start_node].outnodes == set([])):
-            found_feasible_start_node = True
+    start_node = rand_element_of_set(range(graph.node_number))
 
     cycle_node = None
     active_cycle_node = None
