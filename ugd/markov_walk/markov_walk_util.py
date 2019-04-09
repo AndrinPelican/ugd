@@ -5,8 +5,7 @@ import numpy as np
 from ugd.help_function.util import get_path, form_to_set_index
 
 
-def get_violation_matrix(graph, cycle_start_node, active_cyclenode, ind):
-    violation_matrix = np.zeros(graph.crossing_matrix.shape)
+def update_violation_matrix(graph, cycle_start_node, active_cyclenode, ind, violation_matrix):
     # counts the number of changes between/within set partition
     if cycle_start_node == None:
         return violation_matrix
@@ -72,15 +71,3 @@ def del_outarc_marks(graph, node):
     node_pointer.active_marked = {}  # dictionary out_arrows as key, number of Schlaufe as Value
     node_pointer.passive_marked = {}
 
-
-def set_elm_to_non_exept(none_list, except_indexes):
-    # sets all list elements, except the exception list, to None
-    except_indexes = set(except_indexes)
-    for i, element in enumerate(none_list):
-        if not (i in except_indexes):
-            none_list[i] = None
-    return none_list
-
-
-def is_feasible(matrix_list):
-    return np.all(sum(matrix_list) == 0)

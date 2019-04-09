@@ -9,8 +9,8 @@ import numpy as np
 '''costume functions'''
 from ugd.help_function.util import rand_choise
 from ugd.schlaufen_construction.schlaufen import add_random_schlaufe
-from ugd.markov_walk.markov_walk_util import switch_cycles, del_marks, get_violation_matrix
-from ugd.markov_walk.constraint_violation_check import fesable_switch_schlaufen_combination
+from ugd.markov_walk.markov_walk_util import switch_cycles, del_marks, update_violation_matrix
+from ugd.markov_walk.constraint_violation_check import no_violations
 from ugd.help_function.controll_functions_graph import full_graph_correct
 
 def markov_walk(graph, mixing_time):
@@ -45,11 +45,12 @@ def do_random_step(graph):
 
 def create_schlaufen_sequence(graph):
     # finding schlaufen sequence (step 3)
+    k =graph.restriction_set_list.__len__()
+    violation_matrix = np.zeros((k,k))
     ad_schlaufen = True
     start_nodes = []
     cycle_start_nodes = []
     active_cyclenodes = []
-    violation_matrixes = []
 
     ind = 0
     while ad_schlaufen:
@@ -58,14 +59,14 @@ def create_schlaufen_sequence(graph):
         start_nodes.append(start_node)
         cycle_start_nodes.append(cycle_start_node)
         active_cyclenodes.append(active_cyclenode)
-        violation_matrixes.append(get_violation_matrix(graph, cycle_start_node, active_cyclenode, ind))
+        violation_matrix = update_violation_matrix(graph, cycle_start_node, active_cyclenode, ind, violation_matrix)
 
         # find a feasibel combination of Schlaufen
-        is_feasible , switch_cycle_nodes = fesable_switch_schlaufen_combination(violation_matrixes, cycle_start_nodes)
+        is_feasible = no_violations(violation_matrix=violation_matrix)
         if is_feasible:
-            return graph, is_feasible, start_nodes, switch_cycle_nodes, active_cyclenodes
+            return graph, is_feasible, start_nodes, cycle_start_nodes, active_cyclenodes
         else:
-            if rand_choise(0.1):  # note feasible, random interruption
-                return graph, is_feasible, start_nodes, switch_cycle_nodes, active_cyclenodes
+            if rand_choise(0.5):  # note feasible, random interruption
+                return graph, is_feasible, start_nodes, cycle_start_nodes, active_cyclenodes
         ind += 1
 
