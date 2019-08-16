@@ -1,5 +1,5 @@
 
-## Planned changes:
+## Planned changes for a next version:
 
 
 * implementation of optimal test-statistic
@@ -7,7 +7,6 @@
 * make a draw object, which as lowest input has:
     * adjacency matrix
     * opt (control dict, with desired control variables)
-    
     * opt Mixing time, and anz of simulation
     
 Then generates the draws, and creates a weight matrix with the 
@@ -23,7 +22,7 @@ Not changeable by the user:
     
 * internally build up a dictionary, of info variables (on mixing)
     
-* two matrices for calculating the statistic
+* two matrices for calculating the statistic (in order to get the weighted statistic)
 
     * the all one matrix minus the identity matrix
     * the matrix with the weights in the paper used

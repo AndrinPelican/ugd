@@ -18,13 +18,7 @@ to install it, otherwise it uses a cached version
 
 Sometimes markdown not rendered by PyPi
 
-## Todo
 
-* fix: through error if controlled or testvariable requres the vardict, but it is not probided
-
-
-* output
-    * think about how to test integer stat sequence for independence...
 
 ### after github repository
 

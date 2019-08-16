@@ -1,6 +1,5 @@
 # Uniform Graph Draw
 
-*currently under construction*
 
 This package implements random draw algorithm for networks. In particular it creates uniform samples of networks with a
 given degree-sequence and partition constraints (fixed number of crossing edges/arrows between node-groups in partition).
@@ -10,11 +9,13 @@ The literature reefers to this set of constraint also as Partition Adjacency Mat
 
 It is implemented according to the paper:
 
-- Uniform Sampling of Graphs with Fixed Degree Sequence under Partition Constraints
+- [*Pelican, A (2019). Uniform Sampling of Graphs with Fixed Degree
+Sequence under Partition Constraints. Master Thesis, FernUniversität in Hagen.*](https://www.fernuni-hagen.de/MATHEMATIK/DMO/pubs/Master_Andrin_Pelican.pdf) 
     - Proof of correctness of the algorithm
     - Discussion of the PAM-realization problem
     
-- Testing Strategic Interaction in Networks
+- *Pelican, A. & Graham, B. S. (2019). Testing for strategic interaction in social and economic
+network formation. Technical report, University of California - Berkeley.*
     - Derivation of a locally most powerful test statistic for a n-person network formation game in normal form
 
 
@@ -53,8 +54,10 @@ The easiest way to use ugd is by simply passing in the adjacency matrix and set 
 algorithm and plots a default statistic. 
 
 The statistic can be customized. Firstly by entering a dictionary with node characteristics and testing for one characteristic.
-Secondly by writing a costume test statistic and enter it into the function as 'stat_f'. How to write a "local most powerful"
-test statistic for a specific network formation game is derived in *Testing Strategic Interaction in Networks*.
+Secondly by writing a costume test statistic and enter it into the function as 'stat_f'. How to write a "locally most powerful"
+test statistic for a specific network formation game is derived in *Pelican, A. & Graham, B. S. (2019)*. The weights for the optimal
+test statistic is not calculated by this package, it has to be done with other statistical packages and
+feed in via 'stat_f' or directly applied to the list of graphs returned by the ugd package.
 
 Node characteristic can be added as controls. The algorithm then generated uniformly graphs with also have the same number
 of edges between the node-groups induced by the controls. Note that the algorithm is slower if many controls are added. 
@@ -63,7 +66,7 @@ do not slow the algorithm.
 
 The processing of the individual graphs can be easily customized by working directly with the simulated graphs.
 
-
+An entry point of testing social and economic networks can be found here [https://arxiv.org/abs/1908.00099](https://arxiv.org/pdf/1908.00099.pdf).
 
 ## API
 
