@@ -12,7 +12,7 @@ with open("readme.md", "r") as fh:
 
 
 setup(name='ugd',
-      version='0.4.0',
+      version='0.5.0',
       description='Drawing uniformly graphs under partition constraints (Partition Adjacency Matrix). Commonly used for network testing.',
       long_description=long_description,
       long_description_content_type='text/markdown',
