@@ -12,7 +12,7 @@ def postprocess(adj_m_original, stats_list, stat_f, var_dict, test_variable, edg
 
     statisitc_name = stat_f.__name__
     if not (test_variable == None):
-        statisitc_name = 'crosslinks ' + test_variable[0] + ': ' + test_variable[1] + ' to ' + test_variable[2]
+        statisitc_name = 'crosslinks ' + str(test_variable[0]) + ': ' + str(test_variable[1]) + ' to ' + str(test_variable[2])
 
     info_dict = {
         'stat_name': statisitc_name,

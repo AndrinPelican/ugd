@@ -53,7 +53,7 @@ def validate_pos_int(anz_sim):
     try:
         anz_sim = int(anz_sim)
     except ValueError:
-        print("anz_sim must be a integer.")
+        print("anz_sim must be an integer.")
     if anz_sim <= 0:
         raise ValueError("anz_sim must be positive.")
     return anz_sim
@@ -122,14 +122,14 @@ def validate_test_variable(test_variable, var_dict):
         if not (test_variable[0] in var_dict[i]):
             raise ValueError('test_variable must be a tuple with 3 entries, \n' +
                              'first:   variable name of interest \n' +
-                             'second:  value of the variable form which the link depart \n' +
+                             'second:  value of the variable from which the link depart \n' +
                              'third:   value of the variable go which the link go \n' +
                              'The variable name was not in the variable dict of node ', i)
 
         # Verify whether there are nodes with the values to test for
-        if (test_variable[1] in var_dict[i][test_variable[0]]):
+        if (test_variable[1] == var_dict[i][test_variable[0]]):
             first_entry = True
-        if (test_variable[2] in var_dict[i][test_variable[0]]):
+        if (test_variable[2] == var_dict[i][test_variable[0]]):
             second_entry = True
     if not (first_entry):
         raise ValueError('There are no nodes with the value: ', test_variable[1],
@@ -142,10 +142,10 @@ def validate_test_variable(test_variable, var_dict):
 
 def validate_nodesetpartition(nodesetpartition, n):
     if not (isinstance(nodesetpartition, list)):
-        raise ValueError(" nodepartiton must be a list of sets")
+        raise ValueError(" node partiton must be a list of sets")
     for nodest in nodesetpartition:
         if not (isinstance(nodest, set)):
-            raise ValueError(" nodepartiton must be a list of sets")
+            raise ValueError(" node partiton must be a list of sets")
     set_list = nodesetpartition
     total_Set = set()
     total = 0
@@ -165,7 +165,7 @@ def validate_nodesetpartition(nodesetpartition, n):
 def parse_input(stat_f, test_variable, controlls, var_dict, adj_m):
     # substitution input (which can be of different shape into standard shape
     if not (stat_f == None) and not (test_variable == None):
-        warnings.warn('test_varaible and stat_f where given, only stat_f is evaluated')
+        warnings.warn('test_variable and stat_f where given, only stat_f is evaluated')
     # input substitution
     if stat_f == None:
         stat_f = get_default_stat(adj_m=adj_m)

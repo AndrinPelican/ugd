@@ -6,21 +6,21 @@ from ugd.high_level_interface.draw_simulations import hyp_test
 def digraph_hyp_test(adj_m, var_dict=None, stat_f=None, test_variable=None, controls=None, mixing_time=None,
                      anz_sim=1000, show_polt=False):
     '''
-    PURPUSE: gerneration of random Digraphs wich a given degreesequenz and "crossarrow" restrictions, in order to estimate
-             the distribution of a teststatistic under the 0 Hypotheses. Further explanation on methods is given in
+    PURPUSE: generation of random Digraphs which a given degree sequence and "crossarrow" restrictions, in order to estimate
+             the distribution of a test statistic under the 0 Hypotheses. Further explanation on methods is given in
              paper : Testing Strategic Interaction in Networks
 
     INPUT:
     :param adj_m:         A numpy array containing 0 and 1s as elements, representing ajdancy matrix of the Digraph
-    :param var_dict:      A dictionary with the interger 1..n as primary key, where n is the number of nodes,
+    :param var_dict:      A dictionary with the integer 1..n as primary key, where n is the number of nodes,
                           the Values are dictionaries as well with the variable names as key and the variable value as
                           value the values have to be numbers or strings
     :param stat_f:        A function which maps the adj_m and var_dict to a number "The statistic of interest".
-    :param test_variable: Alternative to stat_f, creating a statistic which counts arf form a nodesubses into another:
+    :param test_variable: Alternative to stat_f, creating a statistic which counts arf form a node subsets into another:
                           a triple with first element variable name, second the value of the variable for the set where
                           the arcs leave and third the value of the subset where the arrow go to
-    :param controls:      List of variable names of controlls
-    :param mixing_time:   Number of runs (stepps in the markov graph) before a the graph is considered random
+    :param controls:      List of variable names of controls
+    :param mixing_time:   Number of runs (steps in the markov graph) before a the graph is considered random
     :param anz_sim:       Number of simulations
     :param show_polt:     Boolean whether a plot is desired
     :return:
@@ -61,7 +61,7 @@ def graph_hyp_test(adj_m, var_dict=None, stat_f=None, test_variable=None, contro
     :param adj_m:         A numpy array containing 0 and 1s as elements, representing adjacency matrix of the graph
     :param var_dict:      A dictionary with the integers 1..n as primary key (representing the n nodes).
                           The values are dictionaries containing the Variable name as keys and the values can either be
-                          numbers or be numbers or strings
+                          numbers or strings.
     :param stat_f:        A function which maps the adj_m and var_dict to a number "the statistic of interest".
     :param test_variable: Alternative to stat_f, creating a statistic which counts the arrows form a node-subset into
                           another. It is a triple with first element variable name, second the value of the variable for

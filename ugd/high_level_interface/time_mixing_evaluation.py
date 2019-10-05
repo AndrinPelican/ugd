@@ -17,7 +17,7 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim):
 
     edges_changed_numb = 0
 
-    runs = 100
+    runs = 1000
 
     # counting
     overheattime = 0
@@ -51,11 +51,13 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim):
     # evaluation
 
     time_taken = stop - start - overheattime
-    time_estimated = time_taken * anz_sim * mixing_time / runs
+    time_per_run = time_taken / runs
+    time_per_graph_creation = time_per_run * mixing_time;
+    time_estimated = anz_sim * time_per_graph_creation
     edges_changed_per_draw = edges_changed_numb * mixing_time / runs / n_edges
-    logging.info('The time per run is:  ' + str((time_taken / runs)) + '  seconds.')
+    logging.info('The time per simulated graph is:  ' + str(time_per_graph_creation) + '  seconds.')
     logging.info('The total estimation will last approximately for:  ' + str(int(time_estimated)) + '  seconds.')
-    logging.info('Approximate edge changes per draw/ in percent of total edges:  ' + str(
+    logging.info('Approximate edge changes per draw of simulated graph in percent of total edges:  ' + str(
         int(edges_changed_per_draw * 100)) + '%.')
     return mixing_time, edges_changed_per_draw
 
