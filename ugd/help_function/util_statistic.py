@@ -25,7 +25,7 @@ def get_default_stat(adj_m):
 
     # transitivity statistic count number triads for a undirected network
     def transitivity(adj_m, var_dict):
-        return np.trace(adj_m.dot(adj_m.dot(adj_m))) / 3
+        return np.trace(adj_m.dot(adj_m.dot(adj_m))) / 3 / 2 # /2 due to both direction of the triad
 
     # decide which one to return:
     if check_symmetric(adj_m):

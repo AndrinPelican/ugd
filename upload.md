@@ -5,10 +5,12 @@ See:
 - https://packaging.python.org/tutorials/packaging-projects/
 
 Do: 
-- source a virtual environment with setuptools
+- source a virtual environment with setuptools  (there are some versions of the build and upload packages which cause problems)
 - delete all the folders in the dist/ directory
 - *run:* python3 setup.py sdist bdist_wheel
 - *run:* twine upload dist/*
+
+Username: Andrin
 
 When looking at changes use:
 
