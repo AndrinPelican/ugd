@@ -12,12 +12,15 @@ from ugd.markov_walk.markov_walk import markov_walk
 logging.getLogger().setLevel(logging.INFO)
 
 
-def evaluate_mixing_time(graph, mixing_time, anz_sim):
+def evaluate_mixing_time(graph, mixing_time, anz_sim, fast_mixing_time_evaluation):
     # preparation
 
     edges_changed_numb = 0
 
-    runs = 1000
+    if fast_mixing_time_evaluation:
+        runs = 10,
+    else:
+        runs = 1000
 
     # counting
     overheattime = 0
@@ -38,7 +41,7 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim):
     stop = time.clock()
 
     # validation
-    if edges_changed_numb == 0:
+    if not(fast_mixing_time_evaluation) and edges_changed_numb == 0:
         raise ValueError('After ' + str(
             runs) + ' runs no other graph has been found, Either there doesent exist one, or the probability of '
                     'finding one is very small and it is recommended to reconsider the problem or use '
@@ -46,6 +49,8 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim):
     # completion
     n_edges = number_of_edges(graph)
     if mixing_time == None:
+        if edges_changed_numb==0:
+            logging.critical("no edges are modified while evaluating mixing time, cannot set a default mixing time. Set mixing time manually.")
         mixing_time = int(10 / edges_changed_numb * runs * n_edges)
 
     # evaluation

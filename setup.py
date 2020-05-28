@@ -15,7 +15,7 @@ except:
 
 
 setup(name='ugd',
-      version='0.5.1',
+      version='0.6.1',
       description= 'Drawing uniformly graphs under partition constraints (Partition Adjacency Matrix). Commonly used for network testing.',
       long_description=long_description,
       long_description_content_type='text/markdown',
@@ -24,9 +24,11 @@ setup(name='ugd',
     ],
     install_requires=[
           'numpy',
-          'matplotlib'
+          'matplotlib',
+          'statsmodels',
+          'pandas'
       ],
       author='Andrin Pelican',
-      author_email='andrin.pelican@student.unisg.ch',
+      author_email='pelicanandrin@gmail.com',
       packages=find_packages()
      )

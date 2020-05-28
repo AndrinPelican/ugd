@@ -4,7 +4,7 @@ from ugd.high_level_interface.draw_simulations import hyp_test
 
 
 def digraph_hyp_test(adj_m, var_dict=None, stat_f=None, test_variable=None, controls=None, mixing_time=None,
-                     anz_sim=1000, show_polt=False):
+                     anz_sim=1000, show_polt=False, fast_mixing_time_evaluation = False):
     '''
     PURPUSE: generation of random Digraphs which a given degree sequence and "crossarrow" restrictions, in order to estimate
              the distribution of a test statistic under the 0 Hypotheses. Further explanation on methods is given in
@@ -46,11 +46,11 @@ def digraph_hyp_test(adj_m, var_dict=None, stat_f=None, test_variable=None, cont
     '''
 
     return hyp_test(adj_m, var_dict, stat_f, test_variable, controls, mixing_time, anz_sim, show_polt,
-                    is_directed=True)
+                    is_directed=True,  fast_mixing_time_evaluation = fast_mixing_time_evaluation)
 
 
 def graph_hyp_test(adj_m, var_dict=None, stat_f=None, test_variable=None, controls=None, mixing_time=None,
-                   anz_sim=1000, show_polt=False):
+                   anz_sim=1000, show_polt=False,  fast_mixing_time_evaluation = False):
     '''
     PURPUSE: generation of random Graphs with a given degree sequence and restrictions induced by the node-attributes
              in order to estimate the distribution of a test-statistic under the 0 Hypotheses.Further explanation on
@@ -98,4 +98,4 @@ def graph_hyp_test(adj_m, var_dict=None, stat_f=None, test_variable=None, contro
     '''
 
     return hyp_test(adj_m, var_dict, stat_f, test_variable, controls, mixing_time, anz_sim, show_polt,
-                    is_directed=False)
+                    is_directed=False,  fast_mixing_time_evaluation = fast_mixing_time_evaluation)

@@ -24,13 +24,16 @@ Procedure:
     4) reshape it into the matrix form of edge probabilities
 
 """
+import logging
+logging.getLogger().setLevel(logging.INFO)
+
 import numpy as np
 import statsmodels.api as sm
-from locally_most_powerful_statistic.util.util import create_lcl_mst_pwf_statistic_from_thresholds
+from ugd.locally_most_powerful_stat.util import create_lcl_mst_pwf_statistic_from_thresholds
 from ugd.high_level_interface.construct_node_partition import constr_partition
 
 
-def get_lcl_mst_pwf_statmodel(adj_m, var_dict=None, controls=None, edge_util_function = None):
+def make_lcl_mst_pwf_stat(adj_m, var_dict=None, controls=None, edge_util_function = None):
 
     n = adj_m.shape[0]
 
@@ -42,11 +45,11 @@ def get_lcl_mst_pwf_statmodel(adj_m, var_dict=None, controls=None, edge_util_fun
     logit_res = logit_mod.fit(disp=True, maxiter=20)
 
     # in order to see whether the minimum is found and whether it is global compare the gradient, with the eigenvalues of the hessian
-    print(" The maximal gradient entry in found point is: "+ str(np.max(np.abs(logit_mod.score(logit_res.params)))))
+    logging.info(" The maximal gradient entry in found point is: "+ str(np.max(np.abs(logit_mod.score(logit_res.params)))))
     hessian = - logit_mod.hessian(logit_res.params)
     eigenvalues = np.linalg.eigvalsh(hessian)
-    print("Eigenvalues of Hessian: ")
-    print("maximal: "+ str(max(eigenvalues)) + "  minimal:   " + str(min(eigenvalues)))
+    logging.info("Eigenvalues of Hessian: ")
+    logging.info("maximal: "+ str(max(eigenvalues)) + "  minimal:   " + str(min(eigenvalues)))
 
     thresholds = np.dot(x,logit_res.params)
     threholds_m = logit_probs_to_matrix(thresholds,n, edges_removed_due_to_sparsity)
@@ -65,7 +68,6 @@ def create_logit_varaibles(adj_m, var_dict, controls):
     if not(var_dict is None or controls is None):
         node_set_partition = constr_partition(var_dict=var_dict, controls=controls, adj_m=adj_m)
         sort_partitition(node_set_partition )
-
         x = np.zeros((n * (n - 1), 2 * n + number_of_possible_crossings(node_set_partition)))
     else:
         x = np.zeros((n * (n - 1), 2 * n ))
@@ -216,7 +218,7 @@ def remove_sparse_edges(x,y):
     # remove the corresponding varibales
     x = np.delete(x, sparse_columns,1)
 
-    print("There are "+str(sparse_edges.__len__()) + " not considered in estimation, becaues they belong to a spares "
+    logging.info("There are "+str(sparse_edges.__len__()) + " not considered in estimation, becaues they belong to a spares "
                                                      "node (one with no in or edge realisation at all or due to a "
                                                      "sparse group constraint")
 

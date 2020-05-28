@@ -20,11 +20,3 @@ to install it, otherwise it uses a cached version
 
 Sometimes markdown not rendered by PyPi
 
-
-
-### after github repository
-
-
-For an illustration more extensive use cases, see the examples scripts in:
-
-- www.github/mcd.com .... 
