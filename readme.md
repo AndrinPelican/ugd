@@ -32,21 +32,43 @@ then run
     import ugd
     import numpy
     
-    # create ajdancy matrix
+    # create adjacency matrix
     adj_m = numpy.zeros((4,4))
     adj_m[0,1] = 1
     adj_m[1,0] = 1
     adj_m[3,2] = 1
     adj_m[2,3] = 1
     
-    # create dictionary of nodeatributes 
+    # create dictionary of node attributes
     var_dict ={
         0: {'gender': 'm'},
         1: {'gender': 'm'},
         2: {'gender': 'f'},
         3: {'gender': 'f'},
     }
+    
+    # UNDIRECTED CASE, test whether there are abnormal many connection between groups:
+    
+    # test undirected: note there are 3 possible networks, and only one has no male, female edges
     out_dict = ugd.graph_hyp_test(adj_m=adj_m, var_dict = var_dict, test_variable= ('gender','m','f'),mixing_time=1000, anz_sim=100, show_polt=True)
+    
+    # DIRECTED CASE, test a utility funktion with the local optimal test:
+    
+    # testing whether there is taste for reciprocity:
+    def edge_util_function(adj_m):
+        # the utility is reciprocity -> i gets utility form an edge to j if j has an edge to i
+        return numpy.transpose(adj_m)
+    
+    optimal_stat_for_reciprocity = ugd.make_lcl_mst_pwf_stat(adj_m, edge_util_function= edge_util_function)
+    
+    # there are 9 graphs, for 3 the reciprocity is high, for 6 low, due to symmetry the optimal stat only takes on 2 values
+    out_dict = ugd.digraph_hyp_test(adj_m=adj_m, stat_f=optimal_stat_for_reciprocity , mixing_time=100, anz_sim=100, show_polt=False)
+    
+    print("is stat value of the original graph:")
+    print(out_dict["info_dict"]["original_value"])
+    print("the values of the simulated graphs:")
+    print(out_dict["stat_list"])
+    var_dict = var_dict, test_variable= ('gender','m','f'),mixing_time=1000, anz_sim=100, show_polt=True)
 
 ### Working with ugd
 
@@ -70,15 +92,17 @@ An entry point of testing social and economic networks can be found here [https:
 
 ## API
 
-There are two functions provided.
+There are 3 functions provided.
 
 1) graph_hyp_test
     - generating a sequence of uniform sampled *graphs* under the desired set of constrains.
 2) digraph_hyp_test
     - generating a sequence of uniform sampled *digraphs* under the desired set of constrains.
+3) make_lcl_mst_pwf_stat
+    - making a locally optimal test statistic from the edge utility and the observed network.
+      The locally optimal test statistic can then be used in digraph_hpy_test.
 
-
-For the API the two functions only differs in that the interpretation of the adjacency matrix is once 
+For the API the first two functions only differs in that the interpretation of the adjacency matrix is once 
 as digraph representation and once as graph representation.
 
 
@@ -114,7 +138,25 @@ as digraph representation and once as graph representation.
     info_dict:            Dictionary with the information about the simulation
     
 
+The API for make_lcl_mst_pwf_stat:
 
+   
+    INPUT:
+    :param adj_m:                A numpy array containing 0 and 1s as elements, representing
+                                 adjacency matrix of the digraph
+    :param var_dict:             A dictionary with the integers 1..n as primary key (representing
+                                 the n nodes). The values are dictionaries containing the 
+                                 Variable name as keys and the values can either be numbers or be
+                                 numbers or strings
+    :param controlls:            List of variable names, the number of arrows crossing the groups
+                                 induced by the controls is constant in all the simulation.
+    :param edge_util_function:   A function mapping the an adjency matrix to a numpy matrix, 
+                                 where the entries are the corresponding utility the agent 
+                                 would get from forming the edge. 
+
+    OUTPUT:
+    :param localy_optimal_stat:  A function which maps the adj_m and var_dict to a number "the
+                                 locally optimal statistic for the edge utility".
 
 ## Architecture:
 
@@ -150,16 +192,6 @@ constraints. More complex complex can be implemented by writing a consum impleme
 in *constraint_violation_check*. Note, that depending on the constraint the construction of the Schlaufensequence should
  not be stopped because a feasible one is found, but only due to the random stop. This in order to preserve correctness.
  
-## Testing
-
-All tests are in the test folder. They are written using pytest. 
-To execute them cd into the test folder and run
-
-- pytest 
-
-in the terminal.
-
-
 
 
 

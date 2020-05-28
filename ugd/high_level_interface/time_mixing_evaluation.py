@@ -18,7 +18,7 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim, fast_mixing_time_evaluatio
     edges_changed_numb = 0
 
     if fast_mixing_time_evaluation:
-        runs = 10,
+        runs = 10
     else:
         runs = 1000
 
