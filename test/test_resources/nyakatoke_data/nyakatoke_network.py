@@ -31,10 +31,6 @@ Nyakatoke_ind.loc[Nyakatoke_ind['iid']=='01', 'head_age'] = Nyakatoke_ind['age']
 Nyakatoke_ind['head_sex'] = None
 Nyakatoke_ind.loc[Nyakatoke_ind['iid']=='01', 'head_sex'] = Nyakatoke_ind['sex']
 
-# Create household-level dataset
-grouped = Nyakatoke_ind[['head_age','head_sex','education']].groupby(Nyakatoke_ind['hh1'])
-hh = grouped.max()
-hh.reset_index(level=0, inplace=True)
 
 # Now work with the dyadic dataframe
 # Convert hh1 to string and add leading zeros (to matched with hh dataframe created above)
@@ -48,17 +44,9 @@ Nyakatoke_dyad.loc[:,'hh2'] = Nyakatoke_dyad['hh2'].apply(str).str.zfill(5)
 Nyakatoke_dyad.loc[:,'hh2'] = Nyakatoke_dyad['hh2'].apply(str).str[0:3]
 
 
-# Merge household head age, sex and education information into dyadic dataframe
-# First for household 1 in the dyad
-Nyakatoke_dyad = Nyakatoke_dyad.merge(hh, on = 'hh1', how = 'left', copy = False)
-Nyakatoke_dyad.rename(columns={'head_age' : 'head_age1', 'head_sex' : 'head_sex1', 'education' : 'education1'}, inplace=True)
-
-# Then for household 2 in the dyad
-Nyakatoke_dyad = Nyakatoke_dyad.merge(hh, left_on='hh2', right_on = 'hh1', how = 'left', copy = False)
-
 # NOTE: Last merge creates two instances of hh1 due to how the merge above was done. Drop the second instance and
 #       rename the first
-Nyakatoke_dyad.drop('hh1_y', axis=1, inplace=True)
+# Nyakatoke_dyad.drop('hh1_y', axis=1, inplace=True)
 Nyakatoke_dyad.rename(columns={'hh1_x' : 'hh1'}, inplace=True)
 
 Nyakatoke_dyad.rename(columns={'head_age' : 'head_age2', 'head_sex' : 'head_sex2', 'education' : 'education2'}, inplace=True)
@@ -129,7 +117,7 @@ for key, row in Nyakatoke_dyad.iterrows():
 for key, row in Nyakatoke_dyad.iterrows():
     index_int = id_to_ind_dict[row['hh1']]
     var_dict[index_int]['clan'] = row['clan1']
-    var_dict[index_int]['education'] = row['education1']
+    # var_dict[index_int]['education'] = row['education1']
     var_dict[index_int]['religion'] = row['religion1']
     if row['land1']>0.5:
         var_dict[index_int]['land']  = 'has_land'

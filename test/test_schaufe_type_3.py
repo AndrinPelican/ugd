@@ -1,7 +1,8 @@
 import numpy as np
 from ugd.model.graph import RstGraph
-
 from ugd.schlaufen_construction.schlaufen_construction import add_plain_random_schlaufe
+
+import unittest
 
 '''
 There are only 2 graph with this restrictions for switching it the path has to go over all edges
@@ -19,21 +20,23 @@ def new_graph():
     graph.add_edge((3, 4))
     return graph
 
-def test_schlaufe_type_3():
-    not_case_3 = 0
-    case_3 = 0
+class SchlaufeType3(unittest.TestCase):
 
-    for i in range(10000):
-        graph = new_graph()
+    def test_schlaufe_type_3(self):
+        not_case_3 = 0
+        case_3 = 0
 
-        start_node, cycle_node, active_cycle_node = add_plain_random_schlaufe(graph, schleifen_number=0)
-        if start_node== 1:
+        for i in range(10000):
+            graph = new_graph()
 
-            # case type 3
-            if 2 in graph.nodes[0].active_marked: # the path continued to 2
-                # not case 3 at 0 link
-                not_case_3 += 1
-            else:
-                if 0 in graph.nodes[3].passive_marked or  0 in graph.nodes[4].passive_marked: # the path came to 0 but didnt contunue to 2
-                    case_3 += 1
-    assert abs(not_case_3-case_3)/(case_3+not_case_3)<0.1
+            start_node, cycle_node, active_cycle_node = add_plain_random_schlaufe(graph, schleifen_number=0)
+            if start_node== 1:
+
+                # case type 3
+                if 2 in graph.nodes[0].active_marked: # the path continued to 2
+                    # not case 3 at 0 link
+                    not_case_3 += 1
+                else:
+                    if 0 in graph.nodes[3].passive_marked or  0 in graph.nodes[4].passive_marked: # the path came to 0 but didnt contunue to 2
+                        case_3 += 1
+        assert abs(not_case_3-case_3)/(case_3+not_case_3)<0.1
