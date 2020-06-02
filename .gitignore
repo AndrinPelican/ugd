@@ -7,6 +7,9 @@
 .eggs/
 .cache
 
+upload.md
+developmend_readme.md
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/

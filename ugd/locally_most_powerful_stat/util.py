@@ -1,15 +1,29 @@
 from scipy.stats import logistic
 import numpy as np
-from util.graph_adj_m_util import clear_selfloops, get_pot_triad_m
 
 
 def pos_weight_f(value):
+    value = trim_value(value)
     return logistic.pdf(value) / logistic.cdf(value)
 
 
 def neg_weight_f(value):
+    value = trim_value(value)
     return logistic.pdf(value) / (1-logistic.cdf(value))
 
+def trim_value(value):
+    """
+    Trims the value, so that abs(value)<20,
+    Values bigger then 20 cause numerical instability when calculating logits,
+    The result value dosen't change for 20 upwards
+    :param value:
+    :return:
+    """
+    if value>20:
+        return 20
+    if value<-20:
+        return -20
+    return value
 
 def create_lcl_mst_pwf_statistic_from_thresholds(threholds_m, n, edge_util_function = None):
     """
@@ -43,7 +57,7 @@ def create_lcl_mst_pwf_statistic_from_thresholds(threholds_m, n, edge_util_funct
     return stat
 
 
-def get_edge_treholds(node_dict):
+def get_edge_thresholds(node_dict):
     n = node_dict.__len__()
 
     edge_trehold_m = np.zeros((n,n))
@@ -54,5 +68,15 @@ def get_edge_treholds(node_dict):
     return edge_trehold_m
 
 
+def clear_selfloops(adj_m):
+    for i in range(adj_m.shape[0]):
+        adj_m[i,i]=0
+    return adj_m
+
+
+def get_pot_triad_m(adj_m):
+    pot_triad_m = adj_m.dot(adj_m)
+    pot_triad_m = clear_selfloops(pot_triad_m)
+    return pot_triad_m
 
 

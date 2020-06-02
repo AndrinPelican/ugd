@@ -15,7 +15,7 @@ except:
 
 
 setup(name='ugd',
-      version='0.6.2',
+      version='0.6.3',
       description= 'Drawing uniformly graphs under partition constraints (Partition Adjacency Matrix). Commonly used for network testing.',
       long_description=long_description,
       long_description_content_type='text/markdown',

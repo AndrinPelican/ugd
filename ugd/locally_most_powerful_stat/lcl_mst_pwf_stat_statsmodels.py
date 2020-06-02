@@ -89,8 +89,7 @@ def create_logit_varaibles(adj_m, var_dict, controls):
                 # The indexes for crossing groups, all crossing from one group to another is enumerated
                 if not (var_dict is None or controls is None):
                     ind = ind_of_crossing(i, j, node_set_partition)
-                    if not(ind is None): # only make entry if nodes are from distinct groups
-                        x[k,2*n+ind] = 1
+                    x[k,2*n+ind] = 1
                 k+=1
 
     x,y, edges_removed_due_to_sparsity = remove_sparse_edges(x,y)
@@ -160,7 +159,7 @@ def logit_probs_to_matrix(y, n, edges_removed_due_to_sparsity):
 
 def number_of_possible_crossings(node_set_partition):
     "for each group in partition there is one crossing to each other group "
-    return len(node_set_partition)*(len(node_set_partition)-1)
+    return len(node_set_partition)*len(node_set_partition)
 
 
 def ind_of_crossing(i,j,node_set_partition):
@@ -168,13 +167,9 @@ def ind_of_crossing(i,j,node_set_partition):
     k = 0
     for ind1, set1 in enumerate(node_set_partition):
         for ind2, set2 in enumerate(node_set_partition):
-            if (ind1 == ind2):
-                continue
             if i in set1 and j in set2:
                 return k
             k+=1
-    return None
-
 
 def remove_sparse_edges(x,y):
     """
