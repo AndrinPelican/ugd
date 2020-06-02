@@ -15,10 +15,10 @@ except:
 
 
 setup(name='ugd',
-      version='0.6.3',
+      version='0.6.4',
       description= 'Drawing uniformly graphs under partition constraints (Partition Adjacency Matrix). Commonly used for network testing.',
-      long_description=long_description,
       long_description_content_type='text/markdown',
+      long_description=long_description,
     classifiers=[
         "Programming Language :: Python :: 3",
     ],

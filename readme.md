@@ -4,25 +4,20 @@
 This package implements random draw algorithm for networks. In particular it creates uniform samples of networks with a
 given degree-sequence and partition constraints (fixed number of crossing edges/arrows between node-groups in partition).
 The literature reefers to this set of constraint also as Partition Adjacency Matrix (PAM) restrictions. 
- 
-
 
 It is implemented according to the paper:
 
-- [*Pelican, A (2019). Uniform Sampling of Graphs with Fixed Degree
-Sequence under Partition Constraints. Master Thesis, FernUniversität in Hagen.*](https://www.fernuni-hagen.de/MATHEMATIK/DMO/pubs/Master_Andrin_Pelican.pdf) 
+- [*Pelican, A (2019). Uniform Sampling of Graphs with Fixed Degree Sequence under Partition Constraints. Master Thesis, FernUniversität in Hagen.*](https://www.fernuni-hagen.de/MATHEMATIK/DMO/pubs/Master_Andrin_Pelican.pdf) 
     - Proof of correctness of the algorithm
     - Discussion of the PAM-realization problem
     
-- *Pelican, A. & Graham, B. S. (2019). Testing for strategic interaction in social and economic
-network formation. Technical report, University of California - Berkeley.*
+- *Pelican, A. & Graham, B. S. (2019). Testing for strategic interaction in social and economic network formation. Technical report, University of California - Berkeley.*
     - Derivation of a locally most powerful test statistic for a n-person network formation game in normal form
 
 
 ## Get it Running 
 
 Install the paper via pip:
-
 
 - pip install ugd
  
@@ -169,8 +164,7 @@ All the logic is implemented in the digraph_draw folder. it is divided into
 
 * schlaufen_construction
        
-     Implementation of algorithm 2 from the paper *Schlaufen Detection Algorithm*
-     
+     Implementation of algorithm 2 from the paper *Schlaufen Detection Algorithm*    
 
 *  model
  
@@ -184,15 +178,9 @@ All the logic is implemented in the digraph_draw folder. it is divided into
     
 *  help_functions
 
-
 ### Comment
 
 The current implementation, includes only controlling of a fixed number of crossing edges/arrows between node-groups as 
 constraints. More complex complex can be implemented by writing a consum implementation of the *no_violation* function 
 in *constraint_violation_check*. Note, that depending on the constraint the construction of the Schlaufensequence should
  not be stopped because a feasible one is found, but only due to the random stop. This in order to preserve correctness.
- 
-
-
-
-
