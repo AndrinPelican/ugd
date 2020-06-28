@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 
 
-from ugd import  digraph_hyp_test, graph_hyp_test
+import ugd
 from ugd.help_function.graph_creation import adj_to_in_out_sequences, generate_graph, get_crossing_matrix
 from ugd.high_level_interface.construct_node_partition import constr_partition
 
@@ -14,7 +14,7 @@ class TestIntegrationNayatoke(unittest.TestCase):
         anz_sim = 3
         # wealth and religion is unrelated nearliy
         adj_m1 = adj_m
-        out_dict = graph_hyp_test(adj_m=adj_m, var_dict=var_dict, test_variable=('wealth', 'rich', 'poor'), anz_sim=anz_sim,
+        out_dict = ugd.graph_hyp_test(adj_m=adj_m, var_dict=var_dict, test_variable=('wealth', 'rich', 'poor'), anz_sim=anz_sim,
                                   show_polt=False, controls=['wealth'])
         partition = constr_partition(controls=['wealth'], var_dict=var_dict, adj_m=adj_m)
 

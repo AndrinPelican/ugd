@@ -17,6 +17,14 @@ def get_quantile(true_val, sim_values):
     quant = numb_lower / sim_values.__len__()
     return quant
 
+def get_normalized_numb_graphs_same_as_observed(true_val, sim_values):
+    numb_same = 0
+    for value in sim_values:
+        if value == true_val:
+            numb_same += 1
+    normalized_numb_graphs_same_as_observed = numb_same / sim_values.__len__()
+    return normalized_numb_graphs_same_as_observed
+
 
 def get_default_stat(adj_m):
     # reciprocity statistic count number of bidirectional arrows (for directed networks)

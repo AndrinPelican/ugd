@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from ugd.help_function.util_statistic import get_quantile
+from ugd.help_function.util_statistic import get_quantile, get_normalized_numb_graphs_same_as_observed
 
 
 def postprocess(adj_m_original, stats_list, stat_f, var_dict, test_variable, edges_changed_per_draw, show_polt=False):
@@ -9,6 +9,8 @@ def postprocess(adj_m_original, stats_list, stat_f, var_dict, test_variable, edg
     '''
     org_value = stat_f(adj_m_original, var_dict)
     quantile = get_quantile(org_value, stats_list)
+    normalized_numb_graphs_same_as_observed = get_normalized_numb_graphs_same_as_observed(org_value, stats_list)
+
 
     statisitc_name = stat_f.__name__
     if not (test_variable == None):
@@ -17,6 +19,7 @@ def postprocess(adj_m_original, stats_list, stat_f, var_dict, test_variable, edg
     info_dict = {
         'stat_name': statisitc_name,
         'original_value': org_value,
+        'normalized_numb_graphs_same_as_observed': normalized_numb_graphs_same_as_observed,
         'quantile': quantile,
     }
 

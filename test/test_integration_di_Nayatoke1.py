@@ -1,10 +1,12 @@
+
+# from ugd import digraph_hyp_test
+import ugd
+from ugd.help_function.graph_creation import adj_to_in_out_sequences, generate_graph, get_crossing_matrix
+from ugd.high_level_interface.construct_node_partition import constr_partition
+
 from test.test_resources.nyakatoke_data.nyakatoke_network import di_adj_m, var_dict
 import numpy as np
 import unittest
-
-from ugd import digraph_hyp_test
-from ugd.help_function.graph_creation import adj_to_in_out_sequences, generate_graph, get_crossing_matrix
-from ugd.high_level_interface.construct_node_partition import constr_partition
 
 
 anz_sim = 3
@@ -14,8 +16,10 @@ class TestIntegrationCrossingMatrix(unittest.TestCase):
 
     # wealth and religion is unrelated nearly
     def test_assert_crossingmatrix(self):
-        di_adj_m1 =di_adj_m
-        out_dict = digraph_hyp_test(adj_m=di_adj_m,var_dict=var_dict,test_variable=('wealth','rich','poor'),anz_sim=anz_sim, show_polt=False, controls=['wealth'])
+        # from ugd import digraph_hyp_test
+
+        di_adj_m1 = di_adj_m
+        out_dict = ugd.digraph_hyp_test(adj_m=di_adj_m,var_dict=var_dict,test_variable=('wealth','rich','poor'),anz_sim=anz_sim, show_polt=False, controls=['wealth'])
         partition = constr_partition(controls =['wealth'], var_dict= var_dict, adj_m=di_adj_m)
 
         di_adj_m2 = out_dict['graph_list'][anz_sim - 1]
