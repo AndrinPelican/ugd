@@ -45,5 +45,8 @@ def postprocess(adj_m_original, stats_list, stat_f, var_dict, test_variable, edg
 
     if show_polt:
         plt.show()
+    else:
+        plt.clf()
+        plt.cla()
 
     return plt, info_dict

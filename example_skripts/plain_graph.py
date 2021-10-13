@@ -7,5 +7,7 @@ adj_m[0,1] = 1
 adj_m[2,3] = 1
 
 
-graphs, stats_list = digraph_hyp_test(adj_m=adj_m)
+ouput_dict = digraph_hyp_test(adj_m=adj_m)
+
+print(ouput_dict["graph_list"])
 

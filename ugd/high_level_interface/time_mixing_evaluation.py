@@ -24,21 +24,21 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim, fast_mixing_time_evaluatio
 
     # counting
     overheattime = 0
-    start = time.clock()
+    start = time.time()
     for i in range(runs):
-        s1 = time.clock()
+        s1 = time.time()
         compare_graph = copy.deepcopy(graph)
-        e1 = time.clock()
+        e1 = time.time()
 
         graph = markov_walk(graph, 1)
 
-        s2 = time.clock()
+        s2 = time.time()
         edges_changed_numb += edges_changed(graph, compare_graph)
-        e2 = time.clock()
+        e2 = time.time()
         overheattime += e1 - s1 + e2 - s2
         # print('run number:    ' + str(i))
 
-    stop = time.clock()
+    stop = time.time()
 
     # validation
     if not(fast_mixing_time_evaluation) and edges_changed_numb == 0:
