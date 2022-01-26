@@ -11,7 +11,7 @@ from ugd.help_function.util import rand_choise
 from ugd.schlaufen_construction.schlaufen import add_random_schlaufe
 from ugd.markov_walk.markov_walk_util import switch_cycles, del_marks, update_violation_matrix
 from ugd.markov_walk.constraint_violation_check import no_violations
-from ugd.help_function.controll_functions_graph import full_graph_correct
+from ugd.help_function.control_functions_graph import full_graph_correct
 
 def markov_walk(graph, mixing_time):
     '''

@@ -19,7 +19,7 @@ class TestIntegrationCrossingMatrix(unittest.TestCase):
         # from ugd import digraph_hyp_test
 
         di_adj_m1 = di_adj_m
-        out_dict = ugd.digraph_hyp_test(adj_m=di_adj_m,var_dict=var_dict,test_variable=('wealth','rich','poor'),anz_sim=anz_sim, show_polt=False, controls=['wealth'])
+        out_dict = ugd.digraph_hyp_test(adj_m=di_adj_m,var_dict=var_dict,test_variable=('wealth','rich','poor'),anz_sim=anz_sim, show_plot=False, controls=['wealth'])
         partition = constr_partition(controls =['wealth'], var_dict= var_dict, adj_m=di_adj_m)
 
         di_adj_m2 = out_dict['graph_list'][anz_sim - 1]

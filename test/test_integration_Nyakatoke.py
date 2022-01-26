@@ -15,7 +15,7 @@ class TestIntegrationNayatoke(unittest.TestCase):
         # wealth and religion is unrelated nearliy
         adj_m1 = adj_m
         out_dict = ugd.graph_hyp_test(adj_m=adj_m, var_dict=var_dict, test_variable=('wealth', 'rich', 'poor'), anz_sim=anz_sim,
-                                  show_polt=False, controls=['wealth'])
+                                  show_plot=False, controls=['wealth'])
         partition = constr_partition(controls=['wealth'], var_dict=var_dict, adj_m=adj_m)
 
         adj_m2 = out_dict['graph_list'][anz_sim - 1]

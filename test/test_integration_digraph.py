@@ -18,7 +18,7 @@ class TestIntegrationCrossingMatrix(unittest.TestCase):
 
     def test_graph_no_rstrc(self):
         output_dict= ugd.digraph_hyp_test(adj_m=graph1_adj_m, var_dict=var_dict1, test_variable=('gender', 'm', 'f'),
-                                              anz_sim=1000, mixing_time=100 , show_polt=False)
+                                              anz_sim=1000, mixing_time=100 , show_plot=False)
         stats_list = output_dict['stat_list']
         mue = np.mean(stats_list)
         assert mue > 0.45 and mue < 5.5

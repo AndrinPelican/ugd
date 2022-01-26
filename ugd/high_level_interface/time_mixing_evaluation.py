@@ -43,14 +43,14 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim, fast_mixing_time_evaluatio
     # validation
     if not(fast_mixing_time_evaluation) and edges_changed_numb == 0:
         raise ValueError('After ' + str(
-            runs) + ' runs no other graph has been found, Either there doesent exist one, or the probability of '
-                    'finding one is very small and it is recommended to reconsider the problem or use '
-                    'a different estimation method.')
+            runs) + ' runs no other graph in the target set has been found. Either no such graph exists, or the probability of '
+                    'finding one is very small. It is recommended to reconsider the problem or use '
+                    'a different approach.')
     # completion
     n_edges = number_of_edges(graph)
     if mixing_time == None:
         if edges_changed_numb==0:
-            logging.critical("no edges are modified while evaluating mixing time, cannot set a default mixing time. Set mixing time manually.")
+            logging.critical("No edges were modified while evaluating mixing time, cannot set a default mixing time. Set mixing time manually.")
         mixing_time = int(10 / edges_changed_numb * runs * n_edges)
 
     # evaluation
@@ -60,9 +60,9 @@ def evaluate_mixing_time(graph, mixing_time, anz_sim, fast_mixing_time_evaluatio
     time_per_graph_creation = time_per_run * mixing_time;
     time_estimated = anz_sim * time_per_graph_creation
     edges_changed_per_draw = edges_changed_numb * mixing_time / runs / n_edges
-    logging.info('The time per simulated graph is:  ' + str(time_per_graph_creation) + '  seconds.')
-    logging.info('The total estimation will last approximately for:  ' + str(int(time_estimated)) + '  seconds.')
-    logging.info('Approximate edge changes per draw of simulated graph in percent of total edges:  ' + str(
+    logging.info('Approximate time to draw one graph from the reference set                           : ' + '{:.6f}'.format(time_per_graph_creation) + ' s')
+    logging.info('Total execution time is estimated at                                                : ' + str(int(time_estimated)) + ' s')
+    logging.info('Approximate number of edges changed per simulated graph (as a percent of all edges) : ' + str(
         int(edges_changed_per_draw * 100)) + '%.')
     return mixing_time, edges_changed_per_draw
 

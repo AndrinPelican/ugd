@@ -11,12 +11,12 @@ try:
     with open("readme.md", "r") as fh:
         long_description = fh.read()
 except:
-    long_description = 'Drawing uniformly graphs under partition constraints (Partition Adjacency Matrix). Commonly used for network testing.'
+    long_description = 'Drawing graphs uniformly at random subject to partition constraints (Partition Adjacency Matrix). Used for network testing.'
 
 
 setup(name='ugd',
       version='0.6.5',
-      description= 'Drawing uniformly graphs under partition constraints (Partition Adjacency Matrix). Commonly used for network testing.',
+      description='Drawing graphs uniformly at random subject to partition constraints (Partition Adjacency Matrix). Used for network testing.',
       long_description_content_type='text/markdown',
       long_description=long_description,
     classifiers=[

@@ -36,13 +36,13 @@ var_dict_2 = {
     5: {'gender': 'f'},
 }
 
-out_dict = digraph_hyp_test(adj_m=adj_m, var_dict = var_dict, test_variable=('gender','m','f'), mixing_time=1000, anz_sim=2, show_polt=False)
+out_dict = digraph_hyp_test(adj_m=adj_m, var_dict = var_dict, test_variable=('gender','m','f'), mixing_time=1000, anz_sim=2, show_plot=False)
 
 ax = out_dict['plot']
 plt.show()
 
 #out_dict = digraph_hyp_test(adj_m=adj_m, var_dict = var_dict,  mixing_time=1000, anz_sim=2, show_polt=True)
 
-#graphs, stats_list = graph_hyp_test(adj_m=adj_m_2, var_dict = var_dict_2,  mixing_time=1000, anz_sim=100, show_polt=True)
+#graphs, stats_list = graph_hyp_test(adj_m=adj_m_2, var_dict = var_dict_2,  mixing_time=1000, anz_sim=100, show_plot=True)
 
 

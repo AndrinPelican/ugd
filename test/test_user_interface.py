@@ -15,7 +15,7 @@ class UserInterface(unittest.TestCase):
         adj_m = np.zeros((4, 4))
         with pytest.raises(ValueError) as e_info:
             _ = ugd.graph_hyp_test(adj_m=adj_m, var_dict=var_dict_1, test_variable=('gender', 'm', 'f'),
-                                                mixing_time=100, anz_sim=100, show_polt=False)
+                                                mixing_time=100, anz_sim=100, show_plot=False)
 
 
     def test_only_matrix(self):

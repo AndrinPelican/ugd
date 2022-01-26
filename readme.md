@@ -17,7 +17,7 @@ It is implemented according to the paper:
 
 ## Get it Running 
 
-Install the paper via pip:
+Install the package via pip:
 
 - pip install ugd
  
@@ -71,14 +71,14 @@ The easiest way to use ugd is by simply passing in the adjacency matrix and set 
 algorithm and plots a default statistic. 
 
 The statistic can be customized. Firstly by entering a dictionary with node characteristics and testing for one characteristic.
-Secondly by writing a costume test statistic and enter it into the function as 'stat_f'. How to write a "locally most powerful"
+Secondly by writing a custom test statistic and passing it into the function as 'stat_f'. How to write a "locally most powerful"
 test statistic for a specific network formation game is derived in *Pelican, A. & Graham, B. S. (2019)*. The weights for the optimal
-test statistic is not calculated by this package, it has to be done with other statistical packages and
+test statistic are not calculated by this package, it has to be done with other statistical packages and
 feed in via 'stat_f' or directly applied to the list of graphs returned by the ugd package.
 
 Node characteristic can be added as controls. The algorithm then generated uniformly graphs with also have the same number
 of edges between the node-groups induced by the controls. Note that the algorithm is slower if many controls are added. 
-Hard constraints (where there are no edges within, or some the groups), such as the group constraint in a bipartite graph 
+Hard constraints (where there are no edges within, or across some the groups), such as the group constraint in a bipartite graph 
 do not slow the algorithm.
 
 The processing of the individual graphs can be easily customized by working directly with the simulated graphs.
@@ -103,34 +103,42 @@ as digraph representation and once as graph representation.
 
     
     INPUT:
-    :param adj_m:         A numpy array containing 0 and 1s as elements, representing
-                          adjacency matrix of the graph
-    :param var_dict:      A dictionary with the integers 1..n as primary key (representing
-                          the n nodes). The values are dictionaries containing the 
-                          Variable name as keys and the values can either be numbers or be
-                          numbers or strings
-    :param stat_f:        A function which maps the adj_m and var_dict to a number "the
-                          statistic of interest".
-    :param test_variable: Alternative to stat_f, creating a statistic which counts the
-                          arrows form a node-subset into another. It is a triple with 
-                          first element variable name, second the value of the variable 
-                          for the set where the arrows leave and third the value of the 
-                          subset where the arrow go to.
-    :param controlls:     List of variable names, the number of arrows crossing the groups
-                          induced by the controls is constant in all the simulation.
-    :param mixing_time:   Number of runs (steps in the markov graph) before a the graph
-                          is considered random
-    :param anz_sim:       Number of simulations
-    :param show_polt:     Boolean whether a plot is desired
-
+    -----------------------------------------------------------------------------------------------------    
+    :param adj_m:         A numpy array containing 0 and 1s as elements, representing adjacency 
+                          matrix of the digraph.
+    
+    :param var_dict:      A dictionary with the integer 1..n as primary Key, where n is the 
+                          number of nodes, the Values are also dictionaries (with the variable 
+                          names as Keys and variable values as Values). Values have to be numbers 
+                          or strings.
+    
+    :param stat_f:        A function which maps the adj_m and var_dict to a real number 
+                          ("The statistic of interest").
+    
+    :param test_variable: Alternative to stat_f, creating a statistic which counts arcs from 
+                          one node subset into another: a triple with first element equal to a 
+                          variable name, second element equal to the value of the variable 
+                          for the node set where the arcs are directed from, and third element 
+                          the value for the subset where the arcs are directed to.
+    
+    :param controls:      List of variable names for the controls used to define the cross-link 
+                          matrix.
+    
+    :param mixing_time:   Number of runs (steps in the markov graph) before a the graph is 
+                          considered a unifom random draw from the target set.
+    
+    :param anz_sim:       Number graphs to simulate/generate.
+    
+    :param show_plot:     Boolean for whether a plot is desired.
+    
+    
     OUTPUT:
-    :return: out_dict     Dictionary with keys 'graph_list', 'stat_list', 'plot',
-                          and 'info_dict'
-    graph_list:           List of random adjacency matrices with the given degree-sequence
-                          and arrows between the controls
-    stat_list:            List of the statistics stat_f evaluated for the random graphs
-    plot:                 Plot with the illustration of the estimation output
-    info_dict:            Dictionary with the information about the simulation
+    -----------------------------------------------------------------------------------------------------        
+    graph_list:           List of random adjacency matrices with the given in- and out- degree sequences 
+                          and "cross-arrow" (or cross-link) restrictions.
+    
+    stats_list:           List of the statistics, stat_f, evaluated for the simulated graphs.
+   
     
 
 The API for make_lcl_mst_pwf_stat:
@@ -138,13 +146,16 @@ The API for make_lcl_mst_pwf_stat:
    
     INPUT:
     :param adj_m:                A numpy array containing 0 and 1s as elements, representing
-                                 adjacency matrix of the digraph
+                                 adjacency matrix of the digraph.
+    
     :param var_dict:             A dictionary with the integers 1..n as primary key (representing
                                  the n nodes). The values are dictionaries containing the 
                                  Variable name as keys and the values can either be numbers or be
-                                 numbers or strings
+                                 numbers or strings.
+                                 
     :param controlls:            List of variable names, the number of arrows crossing the groups
                                  induced by the controls is constant in all the simulation.
+                                 
     :param edge_util_function:   A function mapping the an adjency matrix to a numpy matrix, 
                                  where the entries are the corresponding utility the agent 
                                  would get from forming the edge. 
@@ -181,6 +192,6 @@ All the logic is implemented in the digraph_draw folder. it is divided into
 ### Comment
 
 The current implementation, includes only controlling of a fixed number of crossing edges/arrows between node-groups as 
-constraints. More complex complex can be implemented by writing a consum implementation of the *no_violation* function 
-in *constraint_violation_check*. Note, that depending on the constraint the construction of the Schlaufensequence should
- not be stopped because a feasible one is found, but only due to the random stop. This in order to preserve correctness.
+constraints. More complex constraints can be implemented by writing a custom implementation of the *no_violation* function 
+in *constraint_violation_check*. Note, that depending on the constraint the construction of the Schlaufen sequence should
+not be stopped because a feasible one is found, but only due to the random stop. This in order to preserve correctness.

@@ -8,7 +8,7 @@ from ugd.high_level_interface.validation import validate_input, parse_input
 from ugd.markov_walk.markov_walk import markov_walk
 
 
-def hyp_test(adj_m, var_dict, stat_f, test_variable, controlls, mixing_time, anz_sim, show_polt, is_directed, fast_mixing_time_evaluation):
+def hyp_test(adj_m, var_dict, stat_f, test_variable, controlls, mixing_time, anz_sim, show_plot, is_directed, fast_mixing_time_evaluation):
     ''' contains the actual flow of the procedure,'''
 
     '1) validation and input substitution'
@@ -26,7 +26,7 @@ def hyp_test(adj_m, var_dict, stat_f, test_variable, controlls, mixing_time, anz
 
     '5) post processing, estimating the distribution, plotting'
     plt, info_dict = postprocess(adj_m_original=adj_m, stats_list=stats_list, var_dict=var_dict, stat_f=stat_f,
-                                 show_polt=show_polt, test_variable=test_variable,
+                                 show_plot=show_plot, test_variable=test_variable,
                                  edges_changed_per_draw=edges_changed_per_draw)
 
     return {'graph_list': graphs, 'stat_list': stats_list, 'plot': plt, 'info_dict': info_dict}
