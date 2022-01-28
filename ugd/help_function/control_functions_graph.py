@@ -49,9 +49,9 @@ def graph_is_full(graph):
     # checks whether the graph degrees are consistent with the degree sequence
     for i, node in enumerate(graph.nodes):
         if not (graph.degree_serie[i] == node.degree):
-            raise ValueError('indegree property not fulfielled')
+            raise ValueError('indegree property not fulfilled')
         if not (graph.degree_serie[i] == node.outnodes.__len__()):
-            raise ValueError('indegree property not fulfielled')
+            raise ValueError('indegree property not fulfilled')
 
 
 def matrix_consistent(rstGraph):
@@ -72,7 +72,7 @@ def matrix_consistent(rstGraph):
 def node_id_in_place(graph):
     for i, node in enumerate(graph.nodes):
         if not (i == node.id):
-            raise ValueError('id and node position does not match')
+            raise ValueError('id and node position do not match')
 
 
 def node_correct(node, n):

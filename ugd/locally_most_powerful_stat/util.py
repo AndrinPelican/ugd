@@ -27,7 +27,7 @@ def trim_value(value):
 
 def create_lcl_mst_pwf_statistic_from_thresholds(threholds_m, n, edge_util_function = None):
     """
-    :param threholds_m: Thresholds_m are te thresholds per edge denoted in the paper with $t$
+    :param threholds_m: Thresholds_m are the thresholds per edge denoted in the paper with $t$
     :param n: number of nodes
     :param edge_util_function: function which maps a graph represented in the adjacency matrix to a matrix of the same
                                shape representing the additional utility of the agent form forming the edge
@@ -60,12 +60,12 @@ def create_lcl_mst_pwf_statistic_from_thresholds(threholds_m, n, edge_util_funct
 def get_edge_thresholds(node_dict):
     n = node_dict.__len__()
 
-    edge_trehold_m = np.zeros((n,n))
+    edge_threshhold_m = np.zeros((n,n))
 
     for i in range(n):
         for j in range(n):
-            edge_trehold_m[i,j] = node_dict[i][0]+node_dict[j][1] # here in out affection determined (dimentions)
-    return edge_trehold_m
+            edge_threshhold_m[i,j] = node_dict[i][0]+node_dict[j][1] # here in out affection determined (dimentions)
+    return edge_threshhold_m
 
 
 def clear_selfloops(adj_m):

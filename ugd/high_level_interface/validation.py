@@ -1,6 +1,6 @@
 '''
 Validates the user input, to check whether the API requirements are fulfilled and whether the input graph is correct.
-It there is a violation it throws an error with a hint what is violated.
+It there is a violation it throws an error with a hint as to what is violated.
 Depending on the input, the default parameters are substituted.
 '''
 
@@ -30,22 +30,22 @@ def validate_adj_matrix(adj_m, is_directed):
 
     n = adj_m.shape[0]
     if not (adj_m.shape[0] == adj_m.shape[1]):
-        ValueError('Adjacency matrix must be quadratic (n x n).')
+        ValueError('Adjacency matrix must be square (n x n).')
 
     for i in range(n):
         for j in range(n):
             if not (adj_m[i, j] == 0) and not (adj_m[i, j] == 1):
-                raise ValueError('Matrix is only allowed to have 0, 1 entries (no double arrow).')
+                raise ValueError('Matrix is only allowed to have 0, 1 entries (no double arrows).')
 
             if not (is_directed):  # the plain graph case
                 if not (adj_m[j, i] == adj_m[i, j]):
-                    raise ValueError('For plain graph adjacency matrix must be symmetric.')
+                    raise ValueError('For undirected graphs the adjacency matrix must be symmetric.')
     if adj_m.sum() == 0:
-        raise ValueError('Adjacency matrix must have at least one nonzero entry, empty graph not allowed.')
+        raise ValueError('Adjacency matrix must have at least one nonzero entry, empty graphs are not allowed.')
 
     for i in range(n):
         if adj_m[i, i] == 1:
-            raise ValueError('Diagonal entries of matrix must be 0, (no self loops).')
+            raise ValueError('Diagonal entries of matrix must be 0, (self loops not allowed).')
     return adj_m
 
 
@@ -67,15 +67,15 @@ def validate_var_dict(var_dict, n):
 
     if not (n == var_dict.__len__()):
         raise ValueError(
-            'var_dict must be a dictionary with primary key the integer 1..n, where n is the number of nodes.')
+            'var_dict must be a dictionary with primary Keys equal to the integers 1..n, where n is the number of nodes.')
 
     for i in range(n):
         if not (i in var_dict):
             raise ValueError(
-                'var_dict must be a dictionary with primary key the integer 1..n, where n is the the number of nodes.')
+                'var_dict must be a dictionary with primary Keys equal to the integers 1..n, where n is the the number of nodes.')
         if not (isinstance(var_dict[i], dict)):
             raise ValueError(
-                "Values of var_dict must be a dictionary, with the variable name as key and the variable value as value")
+                "Values of var_dict must be a dictionary, with the variable name as Key and the variable value as Value.")
     return var_dict
 
 
@@ -112,9 +112,9 @@ def validate_test_variable(test_variable, var_dict):
 
     if not (isinstance(test_variable, tuple)):
         raise ValueError(' test_variable must be a tuple with 3 entries, \n'
-                         ' first variable name of interest \n'
-                         ' second: value of the variable form which the arrow depart \n'
-                         ' third: value of the variable go which the arrow go \n'
+                         ' first:  variable name of interest \n'
+                         ' second: value of the variable from which the edges depart \n'
+                         ' third:  value of the variable to which the edges go \n'
                          )
     first_entry = False
     second_entry = False
@@ -122,8 +122,8 @@ def validate_test_variable(test_variable, var_dict):
         if not (test_variable[0] in var_dict[i]):
             raise ValueError('test_variable must be a tuple with 3 entries, \n' +
                              'first:   variable name of interest \n' +
-                             'second:  value of the variable from which the link depart \n' +
-                             'third:   value of the variable go which the link go \n' +
+                             'second:  value of the variable from which the links depart \n' +
+                             'third:   value of the variable to which the links go \n' +
                              'The variable name was not in the variable dict of node ', i)
 
         # Verify whether there are nodes with the values to test for
@@ -142,10 +142,10 @@ def validate_test_variable(test_variable, var_dict):
 
 def validate_nodesetpartition(nodesetpartition, n):
     if not (isinstance(nodesetpartition, list)):
-        raise ValueError(" node partiton must be a list of sets")
+        raise ValueError(" node partiton must be a list of sets.")
     for nodest in nodesetpartition:
         if not (isinstance(nodest, set)):
-            raise ValueError(" node partiton must be a list of sets")
+            raise ValueError(" node partiton must be a list of sets.")
     set_list = nodesetpartition
     total_Set = set()
     total = 0

@@ -7,7 +7,7 @@ import numpy as np
 import copy
 
 '''
-This functions generate from the input a graph in of the class defined in model.
+This function generates from the input a graph in the class defined in model.
 That form is convenient and more efficient for the Schlaufen construction
 '''
 
@@ -84,7 +84,7 @@ def adj_to_sequences(adj):
 The Following function:
 
 Updates the passive_out nodes for each node, taking out the out nodes which are not feasible because the
-new node out degree 0, or a switch would imply a creation of an edge which is never in the graph. This makes 
+new node out degree is 0, or a switch would imply a creation of an edge which is never in the graph. This makes 
 the algorithm more efficient in handling hard constraints.
 
 For a formal proof of correctness see:

@@ -49,9 +49,9 @@ def graph_is_full(graph):
     # checks whether the digraph degrees are consistent with the degree sequence
     for i, node in enumerate(graph.nodes):
         if not (graph.indegree_serie[i] == node.indegree):
-            raise ValueError('indegree property not fulfielled')
+            raise ValueError('indegree property not fulfilled')
         if not (graph.outdegree_serie[i] == node.outdegree):
-            raise ValueError('indegree property not fulfielled')
+            raise ValueError('indegree property not fulfilled')
 
 
 def matrix_consistent(rstGraph):
