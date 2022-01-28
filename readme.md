@@ -11,7 +11,7 @@ It is implemented according to the paper:
     - Proof of correctness of the algorithm
     - Discussion of the PAM-realization problem
     
-- *Pelican, A. & Graham, B. S. (2019). Testing for strategic interaction in social and economic network formation. Technical report, University of California - Berkeley.*
+- [*Pelican, A. & Graham, B. S. (2020). An optimal test for strategic interaction in social and economic network formation between heterogeneous agents*](https://arxiv.org/pdf/2009.00212.pdf)
     - Derivation of a locally most powerful test statistic for a n-person network formation game in normal form
 
 
